@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bracket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .bracket-wrapper {
+            display: flex;
+            gap: 40px; /* Gap between rounds */
+            align-items: stretch;
+            margin-top: 20px;
+        }
+
+        .round {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; /* Spreads later rounds vertically */
+            width: 180px;
+        }
+
+        .round-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #aaa;
+        }
+
+        .match-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            flex-grow: 1;
+        }
+
+        .match {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .team {
+            background-color: #2a2a2a;
+            padding: 10px;
+            border: 1px solid #444;
+            border-bottom: none;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .team:last-child {
+            border-bottom: 1px solid #444;
+        }
+
+        .bye-team {
+            color: #666;
+            font-style: italic;
+        }
+
+        /* --- CONNECTOR LINES --- */
+        .match::after {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: #666;
+        }
+
+        .match:nth-child(odd)::before {
+            content: "";
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            width: 2px;
+            height: calc(100% + 30px); /* Seamlessly bridges the gap down to the even match */
+            background-color: #666;
+        }
+
+        /* Remove lines for the championship round */
+        .round:last-child .match::after,
+        .round:last-child .match::before {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic Tournament Bracket</h1>
+    <input type="number" id="teams-input" name="teams-input" placeholder="Enter the amount of teams">
+    <button type="button" id="submit-button"> Submit </button>
+    <div class="bracket-wrapper" id="bracket-container"></div>
+
+    <!-- Link your external script.js file here -->
+    <script src="script.js"></script>
+</body>
+</html>
